@@ -157,7 +157,7 @@ class JsonParser
         if @hashes.last.is_a?(Hash)
           @hashes.last[@key] = @lista
         elsif @hashes.last.is_a?(Array)
-          @hashes.last.push(@value)
+          @hashes.last.push(@lista)
         end
         @hashes.push(@lista)
         @key = ""
@@ -572,7 +572,6 @@ class JsonParser
 
       in[:qf, SPACE | SLASH | BACK_SLASH | NEW_LINE | TAB | CARRIAGE_RETURN | EMPYT, _]
         puts "json válido"
-        
 
       in[_, _, _]
         raise "#{char} inválido na linha #{@linha} posicao #{@caractere}! "
@@ -644,7 +643,7 @@ input = '{
       "filial": "São Paulo",
       "mes": "Janeiro",
       "valor": 10000
-    },
+    }
   ]
 }'
 
