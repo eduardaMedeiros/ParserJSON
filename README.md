@@ -5,11 +5,15 @@ Parser simplificado utilizando autômatos de pilha para analisar e validar dados
 
 - **Objetos:** Representam coleções de pares nome-valor. São delimitados por chaves (`{}`) e cada par é composto por um nome (string) seguido de dois pontos (`:`), um valor (que pode ser de qualquer tipo JSON) e vírgula (`,`). O último par não precisa de vírgula.
 
-  *{
-    "nome": "João",
-    "idade": 30,
-    "profissao": "Desenvolvedor"
-  }*
+  *{*
+  
+    *"nome": "João",*
+  
+    *"idade": 30,*
+  
+    *"profissao": "Desenvolvedor"*
+  
+  *}*
 
 - **Arrays:** Representam listas ordenadas de valores. São delimitados por colchetes ([]) e os valores são separados por vírgulas.
 
