@@ -8,7 +8,7 @@ class Pilha
   end
 
   def pop
-    e = @pilha.pop
+    @pilha.pop
   end
 
   def double_pop(e1, e2)
@@ -45,7 +45,7 @@ class JsonParser
   BACK_SLASH = '\\'
   NEW_LINE = "\n"
   TAB = "\t"
-  CARRIAGE_RETURN = "\\r"
+  CARRIAGE_RETURN = "\r"
   
   COLON = ':'
   COMMA = ','
@@ -53,15 +53,16 @@ class JsonParser
   
   QUOTE = '"'
   SINGLE_QUOTE = "'"
+  
   SPACE = ' '
+  EMPYT = ''
 
   NEGATIVE = '-'
   ZERO = '0'
   NUMBERS = /[1-9]/
   
-  CARACTERS = /[\p{L}_]/
+  CARACTERS = /[\p{L}_\-.]/
   A = 'a'
-  B = 'b'
   E = 'e'
   F = 'f'
   L = 'l'
@@ -75,7 +76,7 @@ class JsonParser
     @current_state = :q0
 
     @symbols = Pilha.new
-    @hashes = []
+    @hashes = Pilha.new
 
     @key = ""
     @value = ""
@@ -86,10 +87,12 @@ class JsonParser
       @caractere = @caractere + 1
       parser(char)
     end
+
+    @hashes.pop
   end
 
   def parser(char)
-    
+
     if char == NEW_LINE
       @linha = @linha + 1
       @caractere = 0
@@ -428,7 +431,7 @@ class JsonParser
         @symbols.pop
         @current_state = :q6
           
-      in[:qf, SPACE | SPACE | SLASH | BACK_SLASH | NEW_LINE | TAB | CARRIAGE_RETURN, _]
+      in[:qf, SPACE | SLASH | BACK_SLASH | NEW_LINE | TAB | CARRIAGE_RETURN | EMPYT, _]
         puts "json válido"
 
       in[_, _, _]
@@ -439,7 +442,7 @@ class JsonParser
 end
 
 input = '{
-  "empresa": "ACME Inc",
+  "empresa": "ACME Inc.",
   "ano_fundacao": 1990,
   "funcionarios": [
     {
@@ -474,7 +477,7 @@ input = '{
       "descricao": "Implementacao de estrategias de marketing",
       "responsavel": "Pedro Santos",
       "custo_estimado": 75000,
-      "status": "Concluido"
+      "status": true
     }
   ],
   "clientes": [
@@ -482,7 +485,7 @@ input = '{
       "nome": "Empresa XYZ",
       "tipo": "Corporativo",
       "contato": "Fernanda Oliveira",
-      "receita_anual": 150000
+      "receita_anual": 150.89
     },
     {
       "nome": "Loja ABC",
@@ -491,7 +494,7 @@ input = '{
       "receita_anual": 80000
     }
   ]
-} '
+}'
 
 parser = JsonParser.new
 parser.inicializar(input)
