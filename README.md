@@ -21,13 +21,15 @@ Parser simplificado utilizando autômatos de pilha para analisar e validar dados
   
 - **Números:** Representam valores numéricos, tanto inteiros quanto decimais.
 
-  *123
-  3.14*
+  *123*
+  
+  *3.14*
   
 - **Valores Booleanos:** Representam valores lógicos, true ou false.
 
-  *true
-  false*
+  *true*
+  
+  *false*
 
 - **Null:** Representa a ausência de valor.
 
